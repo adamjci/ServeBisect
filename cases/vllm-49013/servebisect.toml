@@ -1,0 +1,18 @@
+[baseline]
+label = "vllm-parent-8dd1b70"
+command = ["python", "staging_benchmark.py", "--variant", "parent", "--iterations", "100"]
+timeout_s = 120
+
+[candidate]
+label = "vllm-culprit-7df3d7d"
+command = ["python", "staging_benchmark.py", "--variant", "culprit", "--iterations", "100"]
+timeout_s = 120
+
+[[metrics]]
+name = "staging_steps_per_second"
+direction = "higher"
+max_regression_pct = 20.0
+
+[output]
+json = "artifacts/servebisect-report.json"
+markdown = "artifacts/servebisect-report.md"

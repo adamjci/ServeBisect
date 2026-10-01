@@ -1,0 +1,21 @@
+[baseline]
+label = "known-good"
+command = ["python3", "baseline.py"]
+
+[candidate]
+label = "candidate"
+command = ["python3", "candidate.py"]
+
+[[metrics]]
+name = "tokens_per_second"
+direction = "higher"
+max_regression_pct = 5
+
+[[metrics]]
+name = "ttft_ms"
+direction = "lower"
+max_regression_pct = 10
+
+[output]
+json = "servebisect-report.json"
+markdown = "servebisect-report.md"

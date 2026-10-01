@@ -1,0 +1,28 @@
+[case]
+id = "vllm-49013"
+title = "Structured-output staging throughput regression"
+project = "vllm-project/vllm"
+upstream_issue = "https://github.com/vllm-project/vllm/issues/49013"
+upstream_fix = "https://github.com/vllm-project/vllm/pull/49919"
+
+[revisions]
+known_good = "8dd1b702f27edeed24a4336f531b01c346e04253"
+first_bad = "7df3d7dada840c68b85b26b79de7f59f676d58e3"
+
+[hardware]
+gpu = "A100"
+vram_gb = 80
+count = 1
+
+[workload]
+rows = 384
+bitmask_width = 8192
+dtype = "int32"
+default_iterations = 100
+
+[expectation]
+metric = "staging_steps_per_second"
+direction = "higher"
+max_regression_pct = 20.0
+upstream_reported_parent_req_per_min = 233.0
+upstream_reported_bad_req_per_min = 121.0
